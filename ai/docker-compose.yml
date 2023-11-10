@@ -1,0 +1,22 @@
+services:
+  langchain:
+    image: localhost/junction2023/langchain
+
+    ports:
+      - 8000:8000
+
+    build:
+      context: .
+
+    environment:
+      CFG__SERVER_OLLAMA: 'http://ollama:11434'
+      CFG__SERVER_HOST: '0.0.0.0'
+
+  ollama:
+    image: ollama/ollama
+
+    ports:
+      - 11434:11434
+
+    volumes:
+      - ./ollama:/root/.ollama
