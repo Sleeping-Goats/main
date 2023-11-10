@@ -1,5 +1,9 @@
 # Sleepy Goats
 
+Junction 2023 Submission
+
+## Architectural Overview
+
 Sleepy Goats provides a general Framework for interactions.
 For documentation purposes a dummy Enterprise "FooBar Enterprises" will be used to represent
 any Entity that uses this particular Software.
@@ -76,4 +80,32 @@ C4Context
     UpdateRelStyle(gGovernment, sPolicy, $textColor="blue", $lineColor="blue", $offsetY="-20", $offsetX="10")
     Rel(pManager, sPolicy, "Decides")
     UpdateRelStyle(pManager, sPolicy, $textColor="blue", $lineColor="blue", $offsetY="30", $offsetX="-20")
+```
+
+## Evaluation Criteria
+
+To evaluate the current and future implementation the following User-Journey is used as a reference point.
+
+Different approaches 
+
+### Template
+
+```mermaid
+journey
+    title Evaluation *XYZ*
+    section Decision Making Experience for Decision Makers (Manager)
+        Query Experience: 0: Manager
+        Handling of Hallucinations: 0: Manager
+        Ecological Impact: 0: Manager
+        Explainability: 0: Manager
+
+    section Data Ingestion Experience for System Administrators (Admin)
+        Data up-to-dateness: 0: Admin
+        Resource Usage for ingestion: 0: Admin
+        Resource Usage for UI: 0: Admin
+
+    section Software Maintanace & Extensibility
+        Ability to change Model: 0: Developer
+        Ability to add or modify Data Sources: 0: Developer
+
 ```
