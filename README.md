@@ -86,7 +86,7 @@ C4Context
 
 To evaluate the current and future implementation the following User-Journey is used as a reference point.
 
-Different approaches 
+Ranking for each approach is done from 0 (Bad) to 9 (Excellent) inclusive.
 
 ### Template
 
