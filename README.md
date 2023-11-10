@@ -1,36 +1,67 @@
 # Sleepy Goats
 
+Sleepy Goats provides a general Framework for interactions.
+For documentation purposes a dummy Enterprise "FooBar Enterprises" will be used to represent
+any Entity that uses this particular Software.
+
+In a traditional company sense decisions are managed by the following paradigm:
+
 ```mermaid
 C4Context
-title System Context diagram for Internet Banking System
+    title Sleeping Goats Research Tool
+    Person_Ext(gGovernment, "Government", "Regulatory Body that might limit a Business ability through one or more regulatory framework")
 
-Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
-Person(customerB, "Banking Customer B")
-Person_Ext(customerC, "Banking Customer C")
-System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
 
-Person(customerD, "Banking Customer D", "A customer of the bank, <br/> with personal bank accounts.")
+    Enterprise_Boundary(b1, "FooBar Enterprises") {
+        System(sPolicy, "Enterprise Policy", "All decisions (either public or private) that have an effect on business critical use-cases")
+        Person(pManager, "Management", "Decision Makers responsible for business critical use-cases.")
+    }
 
-Enterprise_Boundary(b1, "BankBoundary") {
+    System_Boundary(b3, "Data Sources") {
+        System_Ext(s1, "External Data Source #1")
+        System_Ext(s2, "External Data Source #2")
+        System_Ext(s3, "External Data Source #3")
 
-  SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+        Rel(pManager, s1, "Access & Summarize Information")
+        Rel(pManager, s2, "Access & Summarize Information")
+        Rel(pManager, s3, "Access & Summarize Information")
+    }
 
-  System_Boundary(b2, "BankBoundary2") {
-    System(SystemA, "Banking System A")
-    System(SystemB, "Banking System B", "A system of the bank, with personal bank accounts.")
-  }
+    Rel(gGovernment, sPolicy, "Limits")
+    Rel(pManager, sPolicy, "Decides")
+```
 
-  System_Ext(SystemC, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-  SystemDb(SystemD, "Banking System D Database", "A system of the bank, with personal bank accounts.")
+Using our tool the Workflow changes
 
-  Boundary(b3, "BankBoundary3", "boundary") {
-    SystemQueue(SystemF, "Banking System F Queue", "A system of the bank, with personal bank accounts.")
-    SystemQueue_Ext(SystemG, "Banking System G Queue", "A system of the bank, with personal bank accounts.")
-  }
-}
+```mermaid
+C4Context
+    title Sleeping Goats Research Tool
+    Person_Ext(gGovernment, "Government", "Regulatory Body that might limit a Business ability through one or more regulatory framework")
 
-BiRel(customerA, SystemAA, "Uses")
-BiRel(SystemAA, SystemE, "Uses")
-Rel(SystemAA, SystemC, "Sends e-mails", "SMTP")
-Rel(SystemC, customerA, "Sends e-mails to")
+    Enterprise_Boundary(b1, "FooBar Enterprises") {
+        System(sPolicy, "Enterprise Policy", "All decisions (either public or private) that have an effect on business critical use-cases")
+        Person(pManager, "Management", "Decision Makers responsible for business critical use-cases.")
+
+        System_Boundary(b2, "Sleeping Goats") {
+            System(sUI, "Sleeping Goats User Interface")
+            System(sAggregator, "Sleeping Goats User Interface")
+            System(sDataRepository, "Data Repository", "Accesses data and provides a unified interface for access")
+
+            System_Boundary(b3, "Data Sources") {
+                System_Ext(s1, "External Data Source #1")
+                System_Ext(s2, "External Data Source #2")
+                System_Ext(s3, "External Data Source #3")
+                Rel(sDataRepository, s1, "Access Information")
+                Rel(sDataRepository, s2, "Access Information")
+                Rel(sDataRepository, s3, "Access Information")
+            }
+
+            Rel(pManager, sUI, "Query using Natural language")
+            Rel(sUI, sAggregator, "Accessing the underlying ML-Model")
+            Rel(sAggregator, sDataRepository, "Access to the Data stored")
+        }
+    }
+
+    Rel(gGovernment, sPolicy, "Limits")
+    Rel(pManager, sPolicy, "Decides")
 ```
