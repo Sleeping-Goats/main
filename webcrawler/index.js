@@ -51,7 +51,7 @@ app.post('/patents', async (req, res) => {
       }
     );
 
-    res.send(filteredResults || []);
+    res.send(response || []);
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
@@ -60,7 +60,7 @@ app.post('/patents', async (req, res) => {
 
 // News endpoint
 // The request should be a POST request with a body containing an array of urls of the following format:
-// {"urls":["https://www.cnn.com", "https://www.foxnews.com/", "https://www.theguardian.com/europe" ]}
+// {"urls":["https://www.cnn.com", "https://www.foxnews.com/", "https://www.theguardian.com/europe", "https://www.nytimes.com/", "https://www.reuters.com/" ]}
 
 app.post('/news', async (req, res) => {
   try {
@@ -125,9 +125,6 @@ app.post('/news', async (req, res) => {
     const filteredResults = items.filter((item) => {
       const date = new Date(item.date).getTime();
       const today = new Date().getTime();
-
-      console.log('date', date);
-      console.log('today', today);
 
       const oneDay = 24 * 60 * 60 * 1000;
       const diffDays = Math.round(Math.abs((date - today) / oneDay));
