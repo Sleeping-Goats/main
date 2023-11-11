@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
-import logo from "../assets/goat.png";
-import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
-  MainContainer,
+  Avatar,
   ChatContainer,
-  MessageList,
+  ConversationHeader,
+  InfoButton,
+  MainContainer,
   Message,
   MessageInput,
-  Avatar,
+  MessageList,
+  VideoCallButton,
+  VoiceCallButton,
 } from "@chatscope/chat-ui-kit-react";
+import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { Box, Button, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import logo from "../assets/goat.png";
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
@@ -56,9 +60,18 @@ const Chat = () => {
     </Box>
   ) : (
     <Box>
-      <Box height={20} />
-      <div style={{ position: "relative", height: "500px" }}>
+      <div style={{ position: "relative", height: "100vh"}}>
+      {/* <Box height={"5vh"} /> */}
         <MainContainer>
+        {/* <ConversationHeader>
+          <Avatar src={logo} name="Emily" />
+          <ConversationHeader.Content userName="Emily" info="Active 10 mins ago" />
+          <ConversationHeader.Actions>
+            <VoiceCallButton />
+            <VideoCallButton />
+            <InfoButton />
+          </ConversationHeader.Actions>          
+        </ConversationHeader> */}
           <ChatContainer>
             <MessageList>
               {messages.map((msg, index) => (
