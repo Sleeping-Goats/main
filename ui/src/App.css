@@ -1,4 +1,4 @@
-/* Add your custom styles here */
+
 
 body {
   font-family: Arial, sans-serif;
@@ -12,10 +12,18 @@ body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
 }
-
-
-
+body {
+  font-family: Arial, sans-serif;
+ }
+ 
+ form {
+  position: relative;
+  display: inline-block;
+ }
+ 
+ 
 h2 {
   color: #333;
 }
@@ -28,16 +36,39 @@ form {
   margin-top: 20px;
 }
 
+
+
+.rememberMe{
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    margin-bottom: 20px;
+  }
+
+.form-group {
+  margin-bottom: 20px;
+}
+
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* Increase the margin between label and input */
   color: #555;
 }
 
 input,
 button {
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increase the margin between input and button */
 }
+
+/* ... your existing styles ... */
+
+
+
+
+
+
+
+
 
 input[type="email"],
 input[type="password"] {
@@ -78,6 +109,17 @@ a:hover {
   text-decoration: underline;
 }
 
+/* for the side menu */
+.sideMenuButton:hover {
+  cursor: pointer;
+  background-color: hsla(240, 9%, 59%, 0.1);
+}
+.sideMenuButton span {
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 6px;
+  padding-right: 10px;
+}
 
 
 
@@ -126,3 +168,11 @@ a:hover {
     transform: rotate(360deg);
   }
 }
+
+/* .rememberMe{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+   */

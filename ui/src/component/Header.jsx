@@ -1,48 +1,51 @@
-import React from 'react';
-import Popover from '@mui/material/Popover';
+import React, { useState } from 'react';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { FaInfoCircle } from 'react-icons/fa'; // Import the info icon of your choice
+import { FaInfoCircle } from 'react-icons/fa';
+
 
 const Header = ({ userName }) => {
     userName = "Sleeping Goat"
-  const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleInfoClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'info-popover' : undefined;
-
-  return (
-    <header style={styles.header}>
-      <div style={styles.centerContent}>
-        <div style={styles.userName}>{userName}</div>
-      </div>
-      <div style={styles.rightIcons}>
-        <div style={styles.iconContainer} onClick={handleInfoClick}>
-          <FaInfoCircle style={styles.icon} />
+    const handleInfoClick = () => {
+      setModalOpen(true);
+    };
+  
+    const handleModalClose = () => {
+      setModalOpen(false);
+    };
+  
+    return (
+      <header style={styles.header}>
+        <div style={styles.centerContent}>
+          <div style={styles.userName}>{userName}</div>
         </div>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-        >
-          <Typography sx={{ p: 2 }}>THE SLEEPING GOAT</Typography>
-        </Popover>
-      </div>
-    </header>
-  );
-};
+        <div style={styles.rightIcons}>
+          <div style={styles.iconContainer} onClick={handleInfoClick}>
+            <FaInfoCircle style={styles.icon} />
+          </div>
+          <Modal
+            open={isModalOpen}
+            onClose={handleModalClose}
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description"
+          >
+            <Box style={styles.modalBox}>
+              <Typography id="modal-title" variant="h6" component="h2">
+                Sustainable AI
+              </Typography>
+              <Typography id="modal-description" style={styles.modalText}>
+                Modal Content goes here...
+              </Typography>
+            </Box>
+          </Modal>
+        </div>
+      </header>
+    );
+  };
+  
 
 const styles = {
     header: {
@@ -69,6 +72,23 @@ const styles = {
             fontSize: '1.5rem',
             cursor: 'pointer',
             position: 'relative',
+          },
+          modalBox: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#fff',
+            padding: '2rem',
+            outline: 'none',
+          },
+          modalText: {
+            marginTop: '1rem',
+          },
+          closeIcon: {
+            position: 'absolute',
+            top: '0.5rem',
+            right: '0.5rem',
           },
 };
 

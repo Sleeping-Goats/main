@@ -1,10 +1,12 @@
 import "./App.css";
+import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Chat from "./components/Chat";
 import Graph from "./component/Graph";
 import SignIn from "./component/SignIn";
 import { Link } from "@mui/material";
 import Header from "./component/Header";
+
 
 
 const router = createBrowserRouter([
