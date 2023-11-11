@@ -31,8 +31,8 @@ class PatentsScraper(
 
         val response = ok.newCall(request).execute()
         val json = response.body?.string() ?: throw RuntimeException("No response body")
-        val articles = mapper.readValue(json, Array<Patent>::class.java)
-        return articles.map { transformText(it) }
+        val articles = mapper.readValue(json, PatentResponse::class.java)
+        return articles.organic_results.map { transformText(it) }
     }
 
     private fun transformText(patent: Patent): Article {
@@ -47,6 +47,8 @@ class PatentsScraper(
 
         return Article(patent.title, text, patent.pdf ?: "Unknown", false)
     }
+
+    data class PatentResponse(val organic_results: List<Patent>)
 
     data class Patent(
         val title: String,
