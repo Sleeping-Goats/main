@@ -27,7 +27,13 @@ class DataSourceController(
     }
 
     @GetMapping("/data-sources/{name}")
-    fun getSource(@PathVariable name: String): String = storage.getDocument(name)
+    fun getSource(@PathVariable name: String): String {
+        try {
+            return storage.getDocument(name)
+        } catch (e: Exception) {
+            return "No data"
+        }
+    }
 
     @DeleteMapping("/data-sources/{name}")
     fun invalidate(@PathVariable name: String) = storage.invalidate(name)
