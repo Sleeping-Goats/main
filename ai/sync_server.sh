@@ -28,6 +28,6 @@ rsync -r \
 
 rsync \
   -avzq -e "${SSH} -i ${KEYS} -o 'UserKnownHostsFile=${KNOW}'" \
-  ./langchain.service ${USER}@${HOST}:/lib/systemd/system/langchain.service
+  ./langchain.prod.service ${USER}@${HOST}:/lib/systemd/system/langchain.service
 
-# ${SSH} -q -i ${KEYS} -o "UserKnownHostsFile=${KNOW}" ${USER}@${HOST} -t 'systemctl daemon-reload && systemctl restart langchain'
+${SSH} -q -i ${KEYS} -o "UserKnownHostsFile=${KNOW}" ${USER}@${HOST} -t 'systemctl daemon-reload && systemctl restart langchain'

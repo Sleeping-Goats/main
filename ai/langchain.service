@@ -8,7 +8,7 @@ User=root
 WorkingDirectory=/opt/langchain
 ExecStart=/opt/langchain/bin/python /opt/langchain/src/server.py
 Restart=always
-Environment="CFG__SERVER_HOST=0.0.0.0"
+Environment=CFG__OPENAI_TOKEN= CFG__SERVER_HOST=0.0.0.0
 
 [Install]
 WantedBy=multi-user.target

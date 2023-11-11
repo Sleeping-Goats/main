@@ -1,3 +1,4 @@
 # Contains lots of binary data (for models)
 ollama
 chroma_db_oai
+langchain.prod.service

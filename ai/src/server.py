@@ -1,13 +1,12 @@
 from fastapi import FastAPI
-from langserve import add_routes
-from langchain.chat_models import ChatOllama
+from fastapi.middleware.cors import CORSMiddleware
 from langchain.prompts.chat import ChatPromptTemplate
-from config import SERVER_OLLAMA, SERVER_HOST, SERVER_PORT, ML_MODEL_MAIN
+from langserve import add_routes
 
-chat_model = ChatOllama(
-    model=ML_MODEL_MAIN,
-    base_url=SERVER_OLLAMA,
-)
+from config import SERVER_HOST, SERVER_PORT
+from model import create_model
+
+chat_model = create_model()
 
 chat_prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a helpful assistant that translates {input_language} to {output_language}."),
@@ -20,6 +19,13 @@ app = FastAPI(
     description="A simple api server using Langchain's Runnable interfaces",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 add_routes(
     app,
     chat_prompt | chat_model,
@@ -29,8 +35,14 @@ add_routes(
 add_routes(
     app,
     ChatPromptTemplate.from_messages([
-        ("system", "{system}"),
-        ("human", "{text}"),
+        ("human", "Chat History: {chat_history}\nFollow Up Input: {text}"),
+        ("system", """
+            Respond to the Follow Up Input if the Chat History is none.
+            Otherwise respond to the Follow Up Input and consider the Chat History.
+            
+            In any case, If you do not know the answer reply with 'I am sorry'.
+            {system}
+        """)
     ]) | chat_model,
     path="/v1/free",
 )

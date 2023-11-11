@@ -8,40 +8,41 @@ if PATCH_SQLITE:
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 from langchain.vectorstores import Chroma
-from langchain.embeddings import OllamaEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.chat_models import ChatOllama
-from langchain.document_loaders import DirectoryLoader
-from langchain.document_loaders import TextLoader
 from langchain.chains.question_answering import load_qa_chain
+from langchain.document_loaders import UnstructuredURLLoader
+from model import create_model, create_embedding
+import shutil
 
 
-def create_retriever():
-    if False:
-        # load the document and split it into chunks
-        loader = DirectoryLoader(path="data", glob="*.txt", loader_cls=TextLoader)
+def create_retriever(recreate=False):
+    persitence_dir = './chroma_db_oai'
+    if recreate:
+        shutil.rmtree(persitence_dir)
+        # TODO: Download all types from here
+        root = 'http://' + '94.237.38.133:8080' + '/data-sources'
+
+        sources = [
+            'financial',
+            'news',
+            'patents',
+        ]
+
+        urls = [root + '/' + x for x in sources]
+
+        loader = UnstructuredURLLoader(urls=urls)
         documents = loader.load()
 
-        # split it into chunks
         text_splitter = CharacterTextSplitter(chunk_size=40, chunk_overlap=0)
         docs = text_splitter.split_documents(documents)
-
-        print('Splitting...')
-        print('- - - - - - - - - - - - -')
-        print(docs)
-
         vectorstore = Chroma.from_documents(
             documents=docs,
-            embedding=OllamaEmbeddings(
-                model=ML_MODEL_MAIN
-            ),
-            persist_directory="./chroma_db_oai"
+            persist_directory=persitence_dir,
+            embedding=create_embedding(),
         )
     else:
         vectorstore = Chroma(
-            embedding_function=OllamaEmbeddings(
-                model=ML_MODEL_MAIN
-            ),
+            embedding_function=create_embedding(),
             persist_directory="./chroma_db_oai"
         )
 
@@ -51,18 +52,16 @@ def create_retriever():
     )
 
 
+# retriever = create_retriever(True)
 retriever = create_retriever()
 
-question = "What are pancakes made from and what related conflicts arise?"
+question = "What is stainless steel?"
 docs = retriever.get_relevant_documents(question)
 print('- - - - - - - - - - - - -')
 print(docs)
 print('- - - - - - - - - - - - -')
 
-chat_model = ChatOllama(
-    model=ML_MODEL_MAIN,
-    base_url=SERVER_OLLAMA,
-)
+chat_model = create_model()
 
 chain = load_qa_chain(chat_model, chain_type="stuff")
 answer = chain.run(input_documents=docs, question=question)
