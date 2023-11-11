@@ -26,6 +26,15 @@ add_routes(
     path="/v1/model",
 )
 
+add_routes(
+    app,
+    ChatPromptTemplate.from_messages([
+        ("system", "{system}"),
+        ("human", "{text}"),
+    ]) | chat_model,
+    path="/v1/free",
+)
+
 if __name__ == "__main__":
     import uvicorn
 

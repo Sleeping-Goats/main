@@ -1,0 +1,14 @@
+[Unit]
+Description=Langchain Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/langchain
+ExecStart=/opt/langchain/bin/python /opt/langchain/server.py
+Restart=always
+Environment="CFG__SERVER_HOST=0.0.0.0"
+
+[Install]
+WantedBy=multi-user.target
