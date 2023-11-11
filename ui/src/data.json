@@ -1,0 +1,29 @@
+{
+  "cocktails": [
+    {
+      "name": "Mojito",
+      "ingredients": ["White rum", "Sugar", "Lime juice", "Soda water", "Mint"],
+      "description": "A refreshing Cuban cocktail with a combination of sweetness, citrus, and herbaceous mint flavors."
+    },
+    {
+      "name": "Margarita",
+      "ingredients": ["Tequila", "Triple sec", "Lime juice", "Salt"],
+      "description": "A popular Mexican cocktail that's a perfect balance of sweet, sour, salty, and bitter."
+    },
+    {
+      "name": "Cosmopolitan",
+      "ingredients": ["Vodka", "Triple sec", "Cranberry juice", "Fresh lime juice"],
+      "description": "A classy, tart cocktail typically served in a large cocktail glass."
+    },
+    {
+      "name": "Old Fashioned",
+      "ingredients": ["Bourbon or Rye whiskey", "Angostura bitters", "Sugar cube", "Few dashes plain water"],
+      "description": "A traditional whiskey cocktail known for its simplicity and classic taste."
+    },
+    {
+      "name": "Pina Colada",
+      "ingredients": ["White rum", "Coconut cream", "Pineapple juice"],
+      "description": "A sweet, tropical cocktail made with rum, cream of coconut, and pineapple juice, usually served blended or shaken with ice."
+    }
+  ]
+}

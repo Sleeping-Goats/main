@@ -10,7 +10,6 @@ import Header from "./component/Header";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
   },
   {
     path: "/chat",
