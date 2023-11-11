@@ -16,19 +16,26 @@ import {
   ListItem,
   ListItemText,
   Slider,
+  TextareaAutosize,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import logo from "../assets/goat.png";
 import AIResponse from "./AIResponse";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-
+import { Textarea } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
 
   const [messages, setMessages] = useState([]);
+  const [keywordsString, setKeywordsString] = useState("");
+
+  const onChangeKeywords = (event) => {
+    setKeywordsString(event.target.value);
+    console.log(keywordsString)
+  };
 
   useEffect(() => {
     const newMessage = {
@@ -50,7 +57,7 @@ const Chat = () => {
 
   const extractKeywords = () => {
     const userMessages = messages
-      .filter((msg) => msg.sender === "User") // Replace "User" with the appropriate identifier
+      .filter((msg) => msg.sender === "User")
       .flatMap((msg) => msg.message.split(/\s+/));
 
     const uniqueWords = new Set(userMessages);
@@ -61,7 +68,7 @@ const Chat = () => {
           <IconButton edge="end" aria-label="delete">
             <DeleteIcon />
           </IconButton>
-        </ListItem>{" "}
+        </ListItem>
         <Divider />
       </Box>
     ));
@@ -113,6 +120,7 @@ const Chat = () => {
             border: "1px solid rgba(0, 0, 0, 0.12)",
             margin: "2px 5px 5px 5px",
             padding: "10px",
+            width: 260,
           }}
         >
           <List
@@ -131,19 +139,15 @@ const Chat = () => {
             <Typography variant="h5" style={{ marginTop: 20 }}>
               Keywords
             </Typography>
-            <Divider />
+            <Textarea
+              value={keywordsString}
+              onChange={onChangeKeywords}
+              aria-label="minimum height"
+              minRows={3}
+              placeholder="Add keywords separated with comma"
+            />
             {extractKeywords()}
           </List>
-          <Divider />
-          <MessageInput
-            placeholder="Type message here"
-            onSend={handleSendMessage}
-            style={{
-              marginTop: "auto",
-              width: 260,
-              padding: "0.3em 0 0.4em 0em",
-            }}
-          />
         </Box>
       </Box>
       <div style={{ flex: 4, position: "relative" }}>
