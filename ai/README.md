@@ -46,7 +46,7 @@ chmod 777 ./bin/activate  # Allows to execute the necessary shell script
 source ./bin/activate     # Switches the current terminal to use the virtual Environment  
 # Install python dependencies
 python3 -m pip install aiohttp==3.9.0b0
-python3 -m pip install langchain "langserve[all]" uvicorn fastapi
+python3 -m pip install langchain "langserve[all]" uvicorn fastapi chromadb pysqlite3-binary
 ```
 
 3. Install ollama.ai
@@ -57,8 +57,8 @@ systemctl start ollama                  # Starts the Service using systemd
 ollama run llama2                       # Installs the model to use (here llama2)
 ```
 
-4. Copy Files from src folder to /opt/langchain
-5. Copy ai.service to /lib/systemd/system/langchain.service
+4. Sync src to /opt/langchain (See sync_server.sh)
+5. Sync /lib/systemd/system/langchain.service (See sync_server.sh)
 5. Activate and start the Service
 
 ```shell

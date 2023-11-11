@@ -17,7 +17,7 @@ RUN \
 # Seperated from main RUN command, so that we do not have to download aiohttp again (building it might be fragile)
 RUN \
   ./bin/activate && \
-  python3 -m pip install langchain "langserve[all]" uvicorn fastapi langserve[all]
+  python3 -m pip install langchain "langserve[all]" uvicorn fastapi chromadb pysqlite3-binary
 
 COPY src .
 CMD ["python3", "/opt/langchain/server.py"]

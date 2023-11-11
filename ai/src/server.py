@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from langserve import add_routes
 from langchain.chat_models import ChatOllama
 from langchain.prompts.chat import ChatPromptTemplate
-from config import SERVER_OLLAMA, SERVER_HOST, SERVER_PORT
+from config import SERVER_OLLAMA, SERVER_HOST, SERVER_PORT, ML_MODEL_MAIN
 
 chat_model = ChatOllama(
-    model="llama2",
+    model=ML_MODEL_MAIN,
     base_url=SERVER_OLLAMA,
 )
 
