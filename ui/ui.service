@@ -1,0 +1,13 @@
+[Unit]
+Description=Website Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/frontend
+ExecStart=/usr/local/bin/serve -l 80 -s build
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
