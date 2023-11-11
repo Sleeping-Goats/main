@@ -25,16 +25,30 @@ import AIResponse from "./AIResponse";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { Textarea } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
+import person from "../assets/person.png";
+import axios from "axios";
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
 
   const [messages, setMessages] = useState([]);
-  const [keywordsString, setKeywordsString] = useState("");
-
+  const [keywords, setKeywords] = useState("");
+  const [userMessages, setUserMessages] = useState([]);
+  const [userWords, setUserWords] = useState([]);
   const onChangeKeywords = (event) => {
-    setKeywordsString(event.target.value);
-    console.log(keywordsString)
+    setKeywords(event.target.value);
+    console.log(keywords);
+  };
+
+  const sendReq = async () => {
+    console.log("asdasdasdasds");
+    // setUserMessages(messages.filter((msg) => msg.sender === "User"));
+    // .flatMap((msg) => msg.message.split(/\s+/));
+
+    console.log("usermessages", userMessages);
+
+    console.log('userwords', userWords)
+    // let result = await axios.post('/api/new/predict', { keywords, userMessages })
   };
 
   useEffect(() => {
@@ -47,32 +61,24 @@ const Chat = () => {
     setMessages([...messages, newMessage]);
   }, []);
 
-  function keywords(element) {
-    return [0, 1, 2].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  }
+  // const extractKeywords = () => {
+  //   const userMessages = messages
+  //     .filter((msg) => msg.sender === "User")
+  //     .flatMap((msg) => msg.message.split(/\s+/));
 
-  const extractKeywords = () => {
-    const userMessages = messages
-      .filter((msg) => msg.sender === "User")
-      .flatMap((msg) => msg.message.split(/\s+/));
-
-    const uniqueWords = new Set(userMessages);
-    return Array.from(uniqueWords).map((word, index) => (
-      <Box>
-        <ListItem key={index}>
-          <ListItemText primary={word} />
-          <IconButton edge="end" aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </ListItem>
-        <Divider />
-      </Box>
-    ));
-  };
+  //   const uniqueWords = new Set(userMessages);
+  //   return Array.from(uniqueWords).map((word, index) => (
+  //     <Box key={index}>
+  //       <ListItem>
+  //         <ListItemText primary={word} />
+  //         <IconButton edge="end" aria-label="delete">
+  //           <DeleteIcon />
+  //         </IconButton>
+  //       </ListItem>
+  //       <Divider />
+  //     </Box>
+  //   ));
+  // };
 
   const handleSendMessage = (newMessage) => {
     const messageObject = {
@@ -92,6 +98,11 @@ const Chat = () => {
       setMessages((messages) => [...messages, messageObject]);
     if (AIResponseObject.message)
       setMessages((messages) => [...messages, AIResponseObject]);
+
+    console.log('messages of user:', messages.filter((msg) => msg.sender === "User"))
+    console.log('words of user:', messages.filter((msg) => msg.sender === "User").flatMap((msg) => msg.message.split(/\s+/)))
+    setUserMessages(messages.filter((msg) => msg.sender === "User"));
+setUserWords(messages.filter((msg) => msg.sender === "User").flatMap((msg) => msg.message.split(/\s+/)))
   };
   return chatting ? (
     <Box>
@@ -108,7 +119,7 @@ const Chat = () => {
       </Button>
     </Box>
   ) : (
-    <Box style={{ display: "flex", height: "88vh" }}>
+    <Box style={{ display: "flex", height: "88vh", marginTop: "12px" }}>
       <Box>
         <Box
           style={{
@@ -140,14 +151,21 @@ const Chat = () => {
               Keywords
             </Typography>
             <Textarea
-              value={keywordsString}
+              value={keywords}
               onChange={onChangeKeywords}
               aria-label="minimum height"
               minRows={3}
               placeholder="Add keywords separated with comma"
             />
-            {extractKeywords()}
+            {/* {extractKeywords()} */}
           </List>
+          <Button
+            onClick={sendReq}
+            style={{ backgroundColor: "#40acf5" }}
+            variant="contained"
+          >
+            Instant update
+          </Button>
         </Box>
       </Box>
       <div style={{ flex: 4, position: "relative" }}>
@@ -171,7 +189,10 @@ const Chat = () => {
                     direction: msg.direction,
                   }}
                 >
-                  <Avatar src={logo} name={"Goat"} />
+                  <Avatar
+                    src={msg.sender === "Goat" ? logo : person}
+                    name={"Goat"}
+                  />
                 </Message>
               ))}
             </MessageList>

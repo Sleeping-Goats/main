@@ -31,9 +31,9 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Link href="chat">chat</Link>
+      {/* <Link href="chat">chat</Link>
       <Link href="graph">graph</Link>
-      <Link href="signin">signin</Link>
+      <Link href="signin">signin</Link> */}
       <RouterProvider router={router} />
 
 
