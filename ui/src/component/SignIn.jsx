@@ -9,7 +9,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const paperStyle={padding :20,height:'40vh',width:500, margin:"20px auto"}
-  const btnstyle={margin:'8px 0'}
+  
 
   
    //const navigate = useNavigate();
