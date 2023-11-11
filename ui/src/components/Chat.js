@@ -8,6 +8,7 @@ import {
   MessageList,
   Message,
   MessageInput,
+  Avatar,
 } from "@chatscope/chat-ui-kit-react";
 
 const Chat = () => {
@@ -55,7 +56,6 @@ const Chat = () => {
     </Box>
   ) : (
     <Box>
-      {/* Content for else case goes here */}
       <Box height={20} />
       <div style={{ position: "relative", height: "500px" }}>
         <MainContainer>
@@ -63,13 +63,16 @@ const Chat = () => {
             <MessageList>
               {messages.map((msg, index) => (
                 <Message
+                  avata
                   key={index}
                   model={{
                     message: msg.message,
                     sentTime: msg.sentTime,
                     sender: msg.sender,
                   }}
-                />
+                >
+                  <Avatar src={logo} name={"Goat"} />
+                </Message>
               ))}
             </MessageList>
 
@@ -80,10 +83,6 @@ const Chat = () => {
           </ChatContainer>
         </MainContainer>
       </div>
-      ;
-      <Button onClick={() => setChatting(true)} variant="contained">
-        back
-      </Button>
     </Box>
   );
 };
