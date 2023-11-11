@@ -1,5 +1,4 @@
 import React, { useState,  } from "react";
-//import {useNavigate} from "react-router-dom";
 import {Button, TextField, Grid, Paper } from "@mui/material";
 
 
@@ -11,8 +10,6 @@ const SignIn = () => {
   const paperStyle={padding :20,height:'40vh',width:500, margin:"20px auto"}
   
 
-  
-   //const navigate = useNavigate();
     function handleClick(){
         alert("Welcome")
     }
