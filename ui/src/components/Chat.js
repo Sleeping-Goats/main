@@ -26,7 +26,20 @@ import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { Textarea } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import person from "../assets/person.png";
-import axios from "axios";
+// import axios from "axios";
+
+import axios from 'axios';
+
+async function fetchData() {
+  try {
+    const response = await axios.get('http://94.237.38.133:8080/data-sources/keywords');
+    console.log(response);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchData();
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
@@ -41,14 +54,12 @@ const Chat = () => {
   };
 
   const sendReq = async () => {
-    console.log("asdasdasdasds");
-    // setUserMessages(messages.filter((msg) => msg.sender === "User"));
-    // .flatMap((msg) => msg.message.split(/\s+/));
-
+    
     console.log("usermessages", userMessages);
 
-    console.log('userwords', userWords)
-    // let result = await axios.post('/api/new/predict', { keywords, userMessages })
+    console.log("userwords", userWords);
+    let result = await axios.get('http://google.com') //), { keywords, userWords, userMessages })
+    console.log(result)
   };
 
   useEffect(() => {
@@ -99,11 +110,26 @@ const Chat = () => {
     if (AIResponseObject.message)
       setMessages((messages) => [...messages, AIResponseObject]);
 
-    console.log('messages of user:', messages.filter((msg) => msg.sender === "User"))
-    console.log('words of user:', messages.filter((msg) => msg.sender === "User").flatMap((msg) => msg.message.split(/\s+/)))
     setUserMessages(messages.filter((msg) => msg.sender === "User"));
-setUserWords(messages.filter((msg) => msg.sender === "User").flatMap((msg) => msg.message.split(/\s+/)))
+    setUserWords(
+      messages
+        .filter((msg) => msg.sender === "User")
+        .flatMap((msg) => msg.message.split(/\s+/))
+    );
+
+
+    console.log(
+      "messages of user:",
+      messages.filter((msg) => msg.sender === "User")
+    );
+    console.log(
+      "words of user:",
+      messages
+        .filter((msg) => msg.sender === "User")
+        .flatMap((msg) => msg.message.split(/\s+/))
+    );
   };
+
   return chatting ? (
     <Box>
       <Box height={10} />
