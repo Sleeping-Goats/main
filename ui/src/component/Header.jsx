@@ -37,7 +37,7 @@ const Header = ({ userName }) => {
                 Sustainable AI
               </Typography>
               <Typography id="modal-description" style={styles.modalText}>
-                Modal Content goes here...
+                An AI  assistant constantly monitors and selects servers based on real-time data regarding energy sources. It will do it's thinking where ever the energy is the greenest!
               </Typography>
             </Box>
           </Modal>
