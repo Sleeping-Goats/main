@@ -28,14 +28,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import person from "../assets/person.png";
 // import axios from "axios";
 
-import axios from 'axios';
+import axios from "axios";
 
 async function fetchData() {
   try {
-    const response = await axios.get('http://94.237.38.133:8080/data-sources/keywords');
+    const response = await axios.get(
+      "http://94.237.38.133:8080/data-sources/keywords"
+    );
     console.log(response);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
   }
 }
 
@@ -45,21 +47,23 @@ const Chat = () => {
   const [chatting, setChatting] = useState(true);
 
   const [messages, setMessages] = useState([]);
-  const [keywords, setKeywords] = useState("");
+  const [keywords, setKeywords] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [userWords, setUserWords] = useState([]);
   const onChangeKeywords = (event) => {
-    setKeywords(event.target.value);
+    setKeywords(event.target.value.split(",").map((word) => word.trim()));
     console.log(keywords);
   };
 
   const sendReq = async () => {
-    
     console.log("usermessages", userMessages);
-
+    // ['stainless', 'corrosion', 'steel', 'welding', 'Passivation', 'environment']
     console.log("userwords", userWords);
-    let result = await axios.get('http://google.com') //), { keywords, userWords, userMessages })
-    console.log(result)
+    let result = await axios.post(
+      "http://94.237.38.133:8080/data-sources/keywords",
+      keywords
+    ); //), { keywords, userWords, userMessages })
+    console.log(result);
   };
 
   useEffect(() => {
@@ -91,6 +95,13 @@ const Chat = () => {
   //   ));
   // };
 
+  const sendDataToInvoke = async (exampleSendData) => {
+    const result = await axios.post(
+      "http://94.237.38.133:8000/v1/free/invoke",
+      exampleSendData
+    ); 
+    console.log("yolo", result);
+  };
   const handleSendMessage = (newMessage) => {
     const messageObject = {
       message: newMessage,
@@ -117,7 +128,6 @@ const Chat = () => {
         .flatMap((msg) => msg.message.split(/\s+/))
     );
 
-
     console.log(
       "messages of user:",
       messages.filter((msg) => msg.sender === "User")
@@ -128,6 +138,15 @@ const Chat = () => {
         .filter((msg) => msg.sender === "User")
         .flatMap((msg) => msg.message.split(/\s+/))
     );
+
+    const exampleSendData = {
+      input: {
+        chat_history: "The fox says meow",
+        text: "What did the fox say?",
+      },
+    };
+
+    sendDataToInvoke(exampleSendData);
   };
 
   return chatting ? (
