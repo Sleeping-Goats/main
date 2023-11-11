@@ -10,16 +10,20 @@ class DocumentStorage(redisson: RedissonClient, private val mapper: ObjectMapper
 
     private val documentsMap = redisson.getMap<String, String>("documents")
 
+    fun invalidate(key: String) = documentsMap.remove(key)
+
     fun getDocument(key: String): String {
         return documentsMap[key] ?: throw Exception("Document not found")
     }
 
     fun appendToDocument(key: String, newArticle: Article) {
         val newArticleText = """
-            |${newArticle.title}
-            |${newArticle.url}
+            |\n
+            |Article name: ${newArticle.title}
+            |URL: ${newArticle.url}
+            |\n
             |${newArticle.text}
-            \n
+            |\n
         """.trimMargin()
 
         val document = documentsMap[key]

@@ -2,9 +2,11 @@ package com.sleepinggoats.dataloader.scrape
 
 import com.sleepinggoats.dataloader.store.DocumentStorage
 import org.slf4j.LoggerFactory
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Service
 
 @Service
+@EnableConfigurationProperties(ScraperProperties::class)
 class ScrapeService(
     private val keywordEvaluator: ArticleProcessor,
     private val documentStorage: DocumentStorage,
@@ -25,11 +27,11 @@ class ScrapeService(
                 val articles = scraper.scrape()
                 for (article in articles) {
                     if (keywordEvaluator.evaluate(article)) {
+                        log.info("Found matching document: ${article.title}")
                         val summary = keywordEvaluator.summarize(article)
-                        log.info("Found article: ${article.title}")
                         documentStorage.appendToDocument(
                             scraper.name,
-                            Article(article.title, article.url, summary)
+                            Article(article.title, article.url, summary, false)
                         )
                     }
                 }

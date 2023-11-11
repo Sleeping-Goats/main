@@ -9,5 +9,5 @@ config:
 redis:
   url: redis://localhost:6379
 
-llm:
-  url: http://myllm
+scraper:
+  llmUrl: http://94.237.38.133:8000/v1/free/invoke

@@ -1,6 +1,7 @@
 package com.sleepinggoats.dataloader.scrape
 
 import com.sleepinggoats.dataloader.store.DocumentStorage
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -27,4 +28,7 @@ class DataSourceController(
 
     @GetMapping("/data-sources/{name}")
     fun getSource(@PathVariable name: String): String = storage.getDocument(name)
+
+    @DeleteMapping("/data-sources/{name}")
+    fun invalidate(@PathVariable name: String) = storage.invalidate(name)
 }

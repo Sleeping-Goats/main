@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableConfigurationProperties(NewsScraper.Config::class)
-class NewsScraper(
+open class NewsScraper(
     private val config: Config,
     private val ok: OkHttpClient,
     private val mapper: ObjectMapper
@@ -23,8 +23,12 @@ class NewsScraper(
     override val description = "News articles from various sources"
 
     override fun scrape(): List<Article> {
+        return scrapeUrls(config.newsUrls)
+    }
+
+    fun scrapeUrls(urls: List<String>) : List<Article> {
         val body = RequestBody.create("application/json; charset=utf-8".toMediaType(),
-            mapper.writeValueAsString(mapOf("urls" to config.newsUrls))
+            mapper.writeValueAsString(mapOf("urls" to urls))
         )
         val request = okhttp3.Request.Builder()
             .url(config.apiUrl)
@@ -33,7 +37,7 @@ class NewsScraper(
         val response = ok.newCall(request).execute()
         val json = response.body?.string() ?: throw RuntimeException("No response body")
         val articles = mapper.readValue(json, Array<NewsArticle>::class.java)
-        return articles.map { Article(it.title, it.text, it.url) }
+        return articles.map { Article(it.title, it.text, it.url, true) }
     }
 
     @ConfigurationProperties(prefix = "config.scrapers.news")
