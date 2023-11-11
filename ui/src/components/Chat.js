@@ -99,9 +99,19 @@ const Chat = () => {
     const result = await axios.post(
       "http://94.237.38.133:8000/v1/free/invoke",
       exampleSendData
-    ); 
+    );
+
+    const newMessage = {
+      message: result.data.output.content,
+      sentTime: "just now",
+      sender: "Goat",
+    };
+
+    setMessages([...messages, newMessage]);
+
     console.log("yolo", result);
   };
+
   const handleSendMessage = (newMessage) => {
     const messageObject = {
       message: newMessage,
@@ -122,27 +132,27 @@ const Chat = () => {
       setMessages((messages) => [...messages, AIResponseObject]);
 
     setUserMessages(messages.filter((msg) => msg.sender === "User"));
-    setUserWords(
-      messages
-        .filter((msg) => msg.sender === "User")
-        .flatMap((msg) => msg.message.split(/\s+/))
-    );
+    // setUserWords(
+    //   messages
+    //     .filter((msg) => msg.sender === "User")
+    //     .flatMap((msg) => msg.message.split(/\s+/))
+    // );
 
-    console.log(
-      "messages of user:",
-      messages.filter((msg) => msg.sender === "User")
-    );
-    console.log(
-      "words of user:",
-      messages
-        .filter((msg) => msg.sender === "User")
-        .flatMap((msg) => msg.message.split(/\s+/))
-    );
+    console.log("messages of user:", userMessages);
+    // console.log(
+    //   "words of user:",
+    //   messages
+    //     .filter((msg) => msg.sender === "User")
+    //     .flatMap((msg) => msg.message.split(/\s+/))
+    // );
 
+    const mergedMessages = userMessages.map((msg) => msg.message).join(" ");
+
+    console.log("merged", mergedMessages);
     const exampleSendData = {
       input: {
         chat_history: "The fox says meow",
-        text: "What did the fox say?",
+        text: userMessages[userMessages.length - 1].message,
       },
     };
 
