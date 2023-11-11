@@ -1,19 +1,16 @@
 import {
   Avatar,
   ChatContainer,
-  ConversationHeader,
-  InfoButton,
   MainContainer,
   Message,
   MessageInput,
   MessageList,
-  VideoCallButton,
-  VoiceCallButton,
 } from "@chatscope/chat-ui-kit-react";
-import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import logo from "../assets/goat.png";
+import AIResponse from "./AIResponse";
+import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
@@ -21,28 +18,34 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   console.log("🚀 ~ file: Chat.js:17 ~ Chat ~ messages:", messages);
 
-  // Example of adding a new message (you might get these from an API or user input)
   useEffect(() => {
     const newMessage = {
-      message: "Hello, this is a test message!",
+      message: "Hello! Ask this GOAT anything that comes to your mind!",
       sentTime: "just now",
-      sender: "Joe",
+      sender: "Goat",
     };
-    setMessages([...messages, newMessage]);
-  }, []); // Empty dependency array means this runs once when the component mounts
+
+    setMessages((messages) => [...messages, newMessage]);
+  }, []);
 
   const handleSendMessage = (newMessage) => {
     const messageObject = {
-      message: newMessage, // the message text
-      sentTime: new Date().toLocaleTimeString(), // current time
-      sender: "User", // hardcoded sender name, you can change this based on your application's logic
-    };
-    console.log(
-      "🚀 ~ file: Chat.js:34 ~ handleSendMessage ~ messageObject:",
-      messageObject
-    );
+      message: newMessage,
 
-    setMessages((messages) => [...messages, messageObject]); // Update the messages array
+      sentTime: new Date().toLocaleTimeString(),
+      sender: "Goat",
+      direction: "outgoing",
+      position: "single",
+    };
+
+    // Call AI that parses the message and gives a response
+    // Now it's only cocktails
+    const AIResponseObject = AIResponse(newMessage);
+
+    if (messageObject.message)
+      setMessages((messages) => [...messages, messageObject]);
+    if (AIResponseObject.message)
+      setMessages((messages) => [...messages, AIResponseObject]);
   };
   return chatting ? (
     <Box>
@@ -60,18 +63,8 @@ const Chat = () => {
     </Box>
   ) : (
     <Box>
-      <div style={{ position: "relative", height: "100vh"}}>
-      {/* <Box height={"5vh"} /> */}
+      <div style={{ position: "relative", height: "89vh" }}>
         <MainContainer>
-        {/* <ConversationHeader>
-          <Avatar src={logo} name="Emily" />
-          <ConversationHeader.Content userName="Emily" info="Active 10 mins ago" />
-          <ConversationHeader.Actions>
-            <VoiceCallButton />
-            <VideoCallButton />
-            <InfoButton />
-          </ConversationHeader.Actions>          
-        </ConversationHeader> */}
           <ChatContainer>
             <MessageList>
               {messages.map((msg, index) => (
@@ -82,6 +75,7 @@ const Chat = () => {
                     message: msg.message,
                     sentTime: msg.sentTime,
                     sender: msg.sender,
+                    direction: msg.direction,
                   }}
                 >
                   <Avatar src={logo} name={"Goat"} />
