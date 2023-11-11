@@ -1,0 +1,4 @@
+Peter likes milk.
+Manfred eats choclate.
+Peter also eats that.
+However manfred does not drink milk at all.

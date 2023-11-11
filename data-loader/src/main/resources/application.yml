@@ -1,0 +1,15 @@
+config:
+  zone: FI
+  scrapers:
+    news:
+      apiUrl: http://localhost:3500/news
+      newsUrls:
+        - https://www.foxnews.com/
+        - https://www.theguardian.com/
+        - https://www.nytimes.com/
+
+redis:
+  url: redis://localhost:6379
+
+scraper:
+  llmUrl: http://94.237.38.133:8000/v1/free/invoke
