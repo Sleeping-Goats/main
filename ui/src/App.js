@@ -4,6 +4,8 @@ import Chat from "./components/Chat";
 import Graph from "./component/Graph";
 import SignIn from "./component/SignIn";
 import { Link } from "@mui/material";
+import Header from "./component/Header";
+
 
 const router = createBrowserRouter([
   {
@@ -27,11 +29,17 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <Header/>
       <Link href="chat">chat</Link>
       <Link href="graph">graph</Link>
       <Link href="signin">signin</Link>
       <RouterProvider router={router} />
+
+
     </div>
+
+
+
   );
 }
 
