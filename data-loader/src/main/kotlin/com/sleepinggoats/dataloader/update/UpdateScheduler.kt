@@ -18,13 +18,15 @@ class UpdateScheduler(
     private val scraper: ScrapeService,
     private val properties: ApplicationProperties
 ) {
+    private val log = LoggerFactory.getLogger(javaClass)
+
+
     private var nextUpdateTimestamp: UpdateTimestamp = determineNextBestTimestamp()
     private var lastUpdateTimestamp: UpdateTimestamp =
         UpdateTimestamp(0, UpdateTimestamp.ScheduleType.MANUAL)
 
     private val scheduler = Executors.newSingleThreadScheduledExecutor()
 
-    private val log = LoggerFactory.getLogger(javaClass)
 
     fun getNextUpdateTimestamp(): UpdateTimestamp {
         return nextUpdateTimestamp
