@@ -12,7 +12,14 @@ class ArticleProcessor(
     private val mapper: ObjectMapper
 ) {
 
-    var keywords = listOf("metal", "alloy", "steel")
+    var keywords = listOf(
+        "stainless",
+        "corrosion",
+        "steel",
+        "welding",
+        "Passivation",
+        "environment"
+    )
 
     val systemPrompt = """
         You are an assistant that helps the user to summarize a document.
@@ -27,7 +34,7 @@ class ArticleProcessor(
     """.trimIndent()
 
     fun evaluate(article: Article): Boolean {
-        return keywords.any { article.text.contains(it) }
+        return keywords.any { article.text.lowercase().contains(it.lowercase()) }
     }
 
     fun summarize(article: Article): String {
