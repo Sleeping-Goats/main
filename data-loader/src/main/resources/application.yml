@@ -5,6 +5,8 @@ config:
       apiUrl: http://localhost:3500/news
       newsUrls:
         - https://www.foxnews.com/
+        - https://www.theguardian.com/
+        - https://www.nytimes.com/
 
 redis:
   url: redis://localhost:6379

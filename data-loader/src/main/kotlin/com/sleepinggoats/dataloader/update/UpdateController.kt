@@ -1,12 +1,14 @@
 package com.sleepinggoats.dataloader.update
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.concurrent.Executors
 
 @RestController
+@CrossOrigin(
+    origins = ["http://localhost:3000"],
+    maxAge = 3003,
+    methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE]
+)
 class UpdateController(
     private val updateScheduler: UpdateScheduler
 ) {

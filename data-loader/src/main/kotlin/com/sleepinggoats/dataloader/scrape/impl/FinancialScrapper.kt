@@ -20,12 +20,12 @@ class FinancialScrapper(
             listOf(
                 "https://www.marketwatch.com/",
                 "https://www.economist.com/",
-                //"https://www.bloomberg.com/economics",
-                //"https://www.ft.com/",
-                //"https://www.investopedia.com/",
-                //"https://www.zerohedge.com/",
-                //"https://www.reuters.com/business/",
-                //"https://www.business-standard.com/"
+                "https://www.bloomberg.com/economics",
+                "https://www.ft.com/",
+                "https://www.investopedia.com/",
+                "https://www.zerohedge.com/",
+                "https://www.reuters.com/business/",
+                "https://www.business-standard.com/"
             )
         )
     }
