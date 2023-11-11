@@ -28,14 +28,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import person from "../assets/person.png";
 // import axios from "axios";
 
-import axios from 'axios';
+import axios from "axios";
 
 async function fetchData() {
   try {
-    const response = await axios.get('http://94.237.38.133:8080/data-sources/keywords');
+    const response = await axios.get(
+      "http://94.237.38.133:8080/data-sources/keywords"
+    );
     console.log(response);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
   }
 }
 
@@ -45,21 +47,23 @@ const Chat = () => {
   const [chatting, setChatting] = useState(true);
 
   const [messages, setMessages] = useState([]);
-  const [keywords, setKeywords] = useState("");
+  const [keywords, setKeywords] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [userWords, setUserWords] = useState([]);
   const onChangeKeywords = (event) => {
-    setKeywords(event.target.value);
+    setKeywords(event.target.value.split(",").map((word) => word.trim()));
     console.log(keywords);
   };
 
   const sendReq = async () => {
-    
     console.log("usermessages", userMessages);
-
+    // ['stainless', 'corrosion', 'steel', 'welding', 'Passivation', 'environment']
     console.log("userwords", userWords);
-    let result = await axios.get('http://google.com') //), { keywords, userWords, userMessages })
-    console.log(result)
+    let result = await axios.post(
+      "http://94.237.38.133:8080/data-sources/keywords",
+      keywords
+    );
+    console.log(result);
   };
 
   useEffect(() => {
@@ -72,63 +76,55 @@ const Chat = () => {
     setMessages([...messages, newMessage]);
   }, []);
 
-  // const extractKeywords = () => {
-  //   const userMessages = messages
-  //     .filter((msg) => msg.sender === "User")
-  //     .flatMap((msg) => msg.message.split(/\s+/));
+  const sendDataToInvoke = async (exampleSendData) => {
+    const result = await axios.post(
+      "http://94.237.38.133:8000/v1/free/invoke",
+      exampleSendData
+    );
 
-  //   const uniqueWords = new Set(userMessages);
-  //   return Array.from(uniqueWords).map((word, index) => (
-  //     <Box key={index}>
-  //       <ListItem>
-  //         <ListItemText primary={word} />
-  //         <IconButton edge="end" aria-label="delete">
-  //           <DeleteIcon />
-  //         </IconButton>
-  //       </ListItem>
-  //       <Divider />
-  //     </Box>
-  //   ));
-  // };
+    const newMessage = {
+      message: result.data.output.content,
+      sentTime: "just now",
+      sender: "Goat",
+    };
+
+    setMessages((messages) => [...messages, newMessage]);
+
+    console.log("yolo", result);
+  };
 
   const handleSendMessage = (newMessage) => {
     const messageObject = {
       message: newMessage,
-
       sentTime: new Date().toLocaleTimeString(),
       sender: "User",
       direction: "outgoing",
       position: "single",
     };
-
-    // Call AI that parses the message and gives a response
-    // Now it's only cocktails
-    const AIResponseObject = AIResponse(newMessage);
-
-    if (messageObject.message)
-      setMessages((messages) => [...messages, messageObject]);
-    if (AIResponseObject.message)
-      setMessages((messages) => [...messages, AIResponseObject]);
-
-    setUserMessages(messages.filter((msg) => msg.sender === "User"));
-    setUserWords(
-      messages
-        .filter((msg) => msg.sender === "User")
-        .flatMap((msg) => msg.message.split(/\s+/))
-    );
-
-
-    console.log(
-      "messages of user:",
-      messages.filter((msg) => msg.sender === "User")
-    );
-    console.log(
-      "words of user:",
-      messages
-        .filter((msg) => msg.sender === "User")
-        .flatMap((msg) => msg.message.split(/\s+/))
-    );
+  
+    if (messageObject.message) {
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, messageObject];
+  
+        const userMsgs = updatedMessages.filter((msg) => msg.sender === "User");
+        const mergedMessages = userMsgs.map((msg) => msg.message).join(" ");
+  
+        console.log("merged", mergedMessages);
+        const exampleSendData = {
+          input: {
+            chat_history: mergedMessages,
+            system: " ",
+            text: userMsgs[userMsgs.length - 1].message,
+          },
+        };
+  
+        sendDataToInvoke(exampleSendData);
+  
+        return updatedMessages;
+      });
+    }
   };
+  
 
   return chatting ? (
     <Box>
@@ -183,14 +179,13 @@ const Chat = () => {
               minRows={3}
               placeholder="Add keywords separated with comma"
             />
-            {/* {extractKeywords()} */}
           </List>
           <Button
             onClick={sendReq}
             style={{ backgroundColor: "#40acf5" }}
             variant="contained"
           >
-            Instant update
+            update settings
           </Button>
         </Box>
       </Box>
