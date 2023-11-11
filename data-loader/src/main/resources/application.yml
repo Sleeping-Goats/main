@@ -1,0 +1,13 @@
+config:
+  zone: FI
+  scrapers:
+    news:
+      apiUrl: http://localhost:3500/news
+      newsUrls:
+        - https://www.foxnews.com/
+
+redis:
+  url: redis://localhost:6379
+
+llm:
+  url: http://myllm
