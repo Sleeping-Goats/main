@@ -5,7 +5,7 @@ import java.util.concurrent.Executors
 
 @RestController
 @CrossOrigin(
-    origins = ["http://localhost:3000"],
+    origins = ["http://localhost:3000", "http://94.237.38.133:3000"],
     maxAge = 3003,
     methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE]
 )

@@ -30,18 +30,6 @@ import person from "../assets/person.png";
 
 import axios from "axios";
 
-async function fetchData() {
-  try {
-    const response = await axios.get(
-      "http://94.237.38.133:8080/data-sources/keywords"
-    );
-    console.log(response);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-fetchData();
 
 const Chat = () => {
   const [chatting, setChatting] = useState(true);
@@ -50,6 +38,7 @@ const Chat = () => {
   const [keywords, setKeywords] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [userWords, setUserWords] = useState([]);
+
   const onChangeKeywords = (event) => {
     setKeywords(event.target.value.split(",").map((word) => word.trim()));
     console.log(keywords);
@@ -67,6 +56,19 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    console.log("Fetching keywords")
+
+    try {
+      axios.get(
+        "http://94.237.38.133:8080/data-sources/keywords"
+      ).then(
+        res => {
+          setKeywords(res.data); 
+          console.log("Fetched: " + res.data)
+        });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
     const newMessage = {
       message: "Hello! Ask this GOAT anything that comes to your mind!",
       sentTime: "just now",
@@ -77,6 +79,7 @@ const Chat = () => {
   }, []);
 
   const sendDataToInvoke = async (exampleSendData) => {
+
     const result = await axios.post(
       "http://94.237.38.133:8000/v1/free/invoke",
       exampleSendData
@@ -101,30 +104,37 @@ const Chat = () => {
       direction: "outgoing",
       position: "single",
     };
-  
+
     if (messageObject.message) {
       setMessages((prevMessages) => {
-        const updatedMessages = [...prevMessages, messageObject];
-  
-        const userMsgs = updatedMessages.filter((msg) => msg.sender === "User");
+        const userMsgs = prevMessages.filter((msg) => msg.sender === "User");
+
         const mergedMessages = userMsgs.map((msg) => msg.message).join(" ");
-  
+
         console.log("merged", mergedMessages);
-        const exampleSendData = {
-          input: {
-            chat_history: mergedMessages,
-            system: " ",
-            text: userMsgs[userMsgs.length - 1].message,
-          },
-        };
-  
-        sendDataToInvoke(exampleSendData);
-  
+        getSystemMsg().then(systemMsg => {
+          console.log(systemMsg);
+          const exampleSendData = {
+            input: {
+              chat_history: mergedMessages,
+              system: systemMsg,
+              text: messageObject.message,
+            }};
+            sendDataToInvoke(exampleSendData);
+          })
+        const updatedMessages = [...prevMessages, messageObject]
         return updatedMessages;
       });
     }
   };
-  
+
+  const getSystemMsg = (userMsg) => {
+    //if (userMsg.toUpperCase().contains("PATENT")) {
+    return fetch("/systemMsg.txt")
+      .then(r => r.text());
+    //}
+  }
+
 
   return chatting ? (
     <Box>
@@ -163,11 +173,12 @@ const Chat = () => {
               overflowY: "auto",
             }}
           >
-            <Typography variant="h5">Settings</Typography>
-            Reliability: <Slider />
-            Experimental: <Checkbox />
+            <Typography variant="h5">Data sources</Typography>
+            News <Checkbox checked/>
             <br />
-            Active sources: <Checkbox />
+            Financial <Checkbox checked/>
+            <br />
+            Patents <Checkbox checked/>
             <Divider />
             <Typography variant="h5" style={{ marginTop: 20 }}>
               Keywords
