@@ -1,10 +1,29 @@
 # Sleepy Goats
 
-Junction 2023 Submission
+A Junction 2023 Hackathon project.
+
+<p align="center">
+  <img width="200" height="200" src="https://github.com/Sleeping-Goats/main/assets/38818382/9f5937ae-8ea2-4242-8a3c-18aec65eb451">
+</p>
+
+Sleeping Goat is a sustainable AI assistant designed for dynamic information retrieval and summarization, catering to crucial business needs.
+
+We leverage the Electricity Maps API to schedule data scraping during low-emission periods, ensuring our operations are as green as possible.
+
+Users have control over the data sources, which range from news aggregators to patent databases. Our curated packs guarantee reliability, avoiding hallucinations and misinformation.
+
+![image](https://github.com/Sleeping-Goats/main/assets/38818382/6392a724-1674-481e-8260-cc311e811d09)
+
 
 ## Architectural Overview
 
-Sleepy Goats provides a general Framework for interactions.
+![image](https://github.com/Sleeping-Goats/main/assets/38818382/738425f0-9ab4-4f57-ba23-2d089e98efb4)
+
+Our AI prioritizes trustworthiness and efficiency. By pre-processing and indexing internet data, we minimize energy consumption and carbon footprint, unlike conventional real-time processing.
+
+With RAG, or resource-augmented generation, the AI's context is pre-evaluated from trusted sources, supplemented by daily updates and real-time scraping options for the latest information.
+
+Sleepy Goat provides a general Framework for interactions.
 For documentation purposes a dummy Enterprise "FooBar Enterprises" will be used to represent
 any Entity that uses this particular Software.
 
@@ -82,30 +101,3 @@ C4Context
     UpdateRelStyle(pManager, sPolicy, $textColor="blue", $lineColor="blue", $offsetY="30", $offsetX="-20")
 ```
 
-## Evaluation Criteria
-
-To evaluate the current and future implementation the following User-Journey is used as a reference point.
-
-Ranking for each approach is done from 0 (Bad) to 9 (Excellent) inclusive.
-
-### Template
-
-```mermaid
-journey
-    title Evaluation *XYZ*
-    section Decision Making Experience for Decision Makers (Manager)
-        Query Experience: 0: Manager
-        Handling of Hallucinations: 0: Manager
-        Ecological Impact: 0: Manager
-        Explainability: 0: Manager
-
-    section Data Ingestion Experience for System Administrators (Admin)
-        Data up-to-dateness: 0: Admin
-        Resource Usage for ingestion: 0: Admin
-        Resource Usage for UI: 0: Admin
-
-    section Software Maintanace & Extensibility
-        Ability to change Model: 0: Developer
-        Ability to add or modify Data Sources: 0: Developer
-
-```
