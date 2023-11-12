@@ -1,0 +1,83 @@
+Here is some data about patents in the stailness steel industry.
+Use it to provide the response. You MUST include the source URL from this data into your message.
+
+Article name: Precoated steel plate, welded blank, part and methods
+URL: Summary: A method for fabricating a precoated steel plate involves dipping a steel plate in a molten bath to coat the plate with an intermetallic alloy layer and a metal alloy layer. The intermetallic alloy layer is specifically formulated to improve corrosion resistance, while the metal alloy layer provides additional protection against corrosion and wear. The resulting precoated steel plate offers enhanced performance in harsh environments.
+\n
+https://patentimages.storage.googleapis.com/1f/b1/fb/545af8a669e05d/US9669490.pdf
+\n\n
+Article name: High temperature wearable anti-corrosion Fe-Cr-Si iron base alloy materials
+URL: Summary: The invention relates to a high-temperature wear-resistant Fe-Cr-Si based alloy material. The alloy consists of Fe45-68 wt%, Cr20-36 wt%, and Si6-20 wt%. The main phases present in the alloy are Fe9Cr9Si2 metal silicide solid solution and Fe based solid solution, or Fe9Cr9Si2 metal silicide and Fe based solid solution.
+\n
+https://patentimages.storage.googleapis.com/66/7a/1c/24692ec31a8864/CN1844436A.pdf
+\n\n
+Article name: Joining of light metal alloy workpieces to steel workpieces using resistance …
+URL: Summary: A method for bonding a light metal workpiece and a steel workpiece using adhesive ribbons. The method involves applying multiple ribbons to either the light metal or steel surface, or both, before assembly.
+\n
+https://patentimages.storage.googleapis.com/52/7f/a9/8295c131406efa/US10675702.pdf
+\n\n
+Article name: Coated Steel Strips, Coated Stamped Products and Methods
+URL: Summary: A pre-coated steel strip is provided, consisting of a base steel strip with a length of at least 100 m and a width of at least 600 mm. The strip has an aluminum or aluminum alloy pre-coating on at least part of its surface.
+\n
+https://patentimages.storage.googleapis.com/e2/c8/a6/57185b367a0886/US20190276912A1.pdf
+\n\n
+Article name: Production of metal alloys from ores and metal melting direct current (dc) …
+URL: Summary: The invention relates to direct current furnace systems used in the production of various metals, including iron & steel, low carbon ferro chrome, high carbon ferro chrome, ferro manganese, pig iron, ferrosilicon, silicium metal, other ferro alloys, and non-ferrous metals.
+\n
+https://patentimages.storage.googleapis.com/aa/9c/82/40b354b92a79e7/WO2020251491A3.pdf
+\n\n
+Article name: Tool steel alloy with high thermal conductivity
+URL: Summary:
+The patent describes a hot-work tool steel alloy consisting of 0.26-0.55% C, <2% Cr, 1-10% Mo, and up to 15% W. The alloy has a thermal conductivity of over 42 W/mK at room temperature. A process for manufacturing the steel is also disclosed. Keywords: metal, alloy, steel, C, Cr, Mo, W, thermal conductivity, hot work.
+\n
+https://patentimages.storage.googleapis.com/9b/3b/71/51f2b388396c7c/US20170268084A1.pdf
+\n\n
+Article name: Multi-material component and methods of making thereof
+URL: Summary: A patent for a multi-material component joined by a high entropy alloy is presented. The component is made up of different materials and the high entropy alloy is used to join them together. The methods for making the component are also described. Keywords: metal, alloy, steel, high entropy alloy, multi-material component, joining.
+\n
+https://patentimages.storage.googleapis.com/24/ec/4a/583317d410868c/US11535913.pdf
+\n\n
+Article name: Metal-coated steel strip
+URL: Summary: The invention provides a metal alloy coated steel strip offering improved corrosion resistance, ductility, and cosmetic appearance compared to existing products. The alloy coating enhances the steel's properties, providing a more durable and visually appealing product.
+\n
+https://patentimages.storage.googleapis.com/99/27/6f/a053609d4ed489/US20230100917A1.pdf
+\n\n
+Article name: Precoated steel plate, welded blank, part and methods
+URL: Summary: A method for fabricating a precoated steel plate involves dipping a steel plate in a molten bath to coat it with an intermetallic alloy layer and a metal alloy layer. The intermetallic alloy layer is specifically mentioned as being included in the precoat.
+\n
+https://patentimages.storage.googleapis.com/1f/b1/fb/545af8a669e05d/US9669490.pdf
+\n\n
+Article name: High temperature wearable anti-corrosion Fe-Cr-Si iron base alloy materials
+URL: Summary: A high-temperature wear-resistant Fe-Cr-Si alloy material is disclosed, consisting of Fe45-68 wt%, Cr20-36 wt%, and Si6-20 wt%. The main phase compositions include Fe9Cr9Si2 metal silicide solid solution or Fe9Cr9Si2 metal...
+\n
+https://patentimages.storage.googleapis.com/66/7a/1c/24692ec31a8864/CN1844436A.pdf
+\n\n
+Article name: Joining of light metal alloy workpieces to steel workpieces using resistance …
+URL: The patent discloses a method of adhesive weld bonding a light metal workpiece and a steel workpiece. The method involves applying a plurality of discrete adhesive ribbons to either the faying surface of the light metal workpiece or both the faying surfaces of the light metal workpiece and the steel workpiece, and then assembling the two workpieces using the adhesive ribbons. The use of adhesive ribbons allows for a strong bond between the light metal and steel workpieces without the need for mechanical fasteners.
+\n
+https://patentimages.storage.googleapis.com/52/7f/a9/8295c131406efa/US10675702.pdf
+\n\n
+Article name: Coated Steel Strips, Coated Stamped Products and Methods
+URL: The patent describes a pre-coated steel strip with an aluminum or aluminum alloy coating. The steel strip has a length of at least 100 m and a width of at least 600 mm.
+\n
+https://patentimages.storage.googleapis.com/e2/c8/a6/57185b367a0886/US20190276912A1.pdf
+\n\n
+Article name: Production of metal alloys from ores and metal melting direct current (dc) …
+URL: Summary: The invention relates to direct current furnace systems used in the production of various metals, including iron & steel, low carbon ferro chrome, high carbon ferro chrome, ferro manganese, pig iron, ferrosilicon, silicium metal, and other ferro alloys. The patent does not mention non-ferrous metals. (502 characters)
+\n
+https://patentimages.storage.googleapis.com/aa/9c/82/40b354b92a79e7/WO2020251491A3.pdf
+\n\n
+Article name: Tool steel alloy with high thermal conductivity
+URL: Summary: A hot-work tool steel alloy consisting of C (0.26-0.55%), Cr (<2%), Mo (1-10%) and W (up to 15%) has a thermal conductivity of over 42 W/mK at room temperature. The process for making the hot-work steel involves controlling the composition and processing conditions to achieve high thermal conductivity.
+\n
+https://patentimages.storage.googleapis.com/9b/3b/71/51f2b388396c7c/US20170268084A1.pdf
+\n\n
+Article name: Multi-material component and methods of making thereof
+URL: Summary: A patent for a multi-material component joined by a high entropy alloy is described. The component is made up of different materials, and the high entropy alloy acts as a bonding agent to join them together. The patent provides methods for manufacturing such components using high entropy alloys. Keywords: metal, alloy, steel, multi-material, component, high entropy alloy, joining.
+\n
+https://patentimages.storage.googleapis.com/24/ec/4a/583317d410868c/US11535913.pdf
+\n\n
+Article name: Metal-coated steel strip
+URL: Summary: The invention provides a metal alloy coated steel strip with improved properties of corrosion resistance, ductility, cosmetic appearance, and surface finish.
+\n
+https://patentimages.storage.googleapis.com/99/27/6f/a053609d4ed489/US20230100917A1.pdf
